@@ -1,0 +1,64 @@
+# Chicago Art Explorer - root .gitignore
+# This repo contains project docs at the root and a Flutter app in
+# art_explorer_chicago/. Per-platform ignores (android/, ios/, macos/,
+# windows/, linux/) live in their own .gitignore files inside that folder
+# and follow the standard Flutter template; everything else is covered here.
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor / IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+.history/
+.atom/
+.svn/
+.swiftpm/
+
+# Secrets / environment config
+# (Not used yet, but the app plan calls for API integration; keep any
+# future keys/credentials out of version control.)
+.env
+.env.*
+*.pem
+*.key
+
+# Logs and temp files
+*.class
+*.log
+*.pyc
+*.tmp
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+art_explorer_chicago/build/
+art_explorer_chicago/coverage/
+.buildlog/
+migrate_working_dir/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+art_explorer_chicago/android/app/debug
+art_explorer_chicago/android/app/profile
+art_explorer_chicago/android/app/release
