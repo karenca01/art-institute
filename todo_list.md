@@ -4,15 +4,15 @@ This to-do list breaks down the development of the Art Explorer Chicago app into
 
 ## Phase 1: Setup & Core Structure
 
-* [ ] **Project Setup:**
-  * [ ] Create new Flutter project (`flutter create art_explorer_chicago`).
-* [ ] **Dependencies:**
-  * [ ] Add `http` or `dio` for API calls.
-  * [ ] Add a state management solution (e.g., `provider` or `riverpod`).
-  * [ ] Add `cached_network_image` for efficient image loading and caching.
-  * [ ] Add `sqflite` or `sembast` for offline data storage.
-  * [ ] Add `url_launcher` for opening external links (maps, website).
-  * [ ] Add `flutter_svg` if any SVG assets are needed (e.g., for icons).
+* [x] **Project Setup:**
+  * [x] Create new Flutter project (`flutter create art_explorer_chicago`).
+* [x] **Dependencies:**
+  * [x] Add `http` or `dio` for API calls.
+  * [x] Add a state management solution (e.g., `provider` or `riverpod`).
+  * [x] Add `cached_network_image` for efficient image loading and caching.
+  * [x] Add `sqflite` or `sembast` for offline data storage.
+  * [x] Add `url_launcher` for opening external links (maps, website).
+  * [x] Add `flutter_svg` if any SVG assets are needed (e.g., for icons).
 * [ ] **Basic App Structure:**
   * [ ] Set up `main.dart` and basic `MaterialApp` or `CupertinoApp`.
   * [ ] Create a main navigation structure (e.g., `BottomNavigationBar` or `Drawer`).
