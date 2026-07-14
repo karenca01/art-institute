@@ -52,6 +52,16 @@ class ApiService {
     return data.map((json) => Artwork.fromJson(json)).toList();
   }
 
+  /// Fetches multiple artworks in a single request using the API's `ids`
+  /// filter. Returns an empty list when [ids] is empty.
+  Future<List<Artwork>> fetchArtworksByIds(List<int> ids) async {
+    if (ids.isEmpty) return [];
+    final idParam = ids.join(',');
+    final response = await _get('/artworks?ids=$idParam');
+    final List<dynamic> data = response['data'] as List<dynamic>;
+    return data.map((json) => Artwork.fromJson(json)).toList();
+  }
+
   Future<MuseumInfo> fetchMuseumInfo() async {
     final response = await _get('/museum-info');
     return MuseumInfo.fromJson(response);

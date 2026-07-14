@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../providers/artworks_provider.dart';
-import '../models/artwork.dart';
-import '../utils/iiif_url_builder.dart';
-import 'detail/artwork_detail_screen.dart';
-import 'detail/artist_detail_screen.dart';
+import '../widgets/artwork_card.dart';
 
 class ArtworksListScreen extends StatefulWidget {
   const ArtworksListScreen({super.key});
@@ -118,7 +114,7 @@ class _ArtworksListScreenState extends State<ArtworksListScreen> {
                     ),
                     itemCount: artworks.length,
                     itemBuilder: (context, index) {
-                      return _ArtworkCard(artwork: artworks[index]);
+                      return ArtworkCard(artwork: artworks[index]);
                     },
                   ),
                 );
@@ -180,78 +176,6 @@ class _ArtworksListScreenState extends State<ArtworksListScreen> {
             child: const Text('Close'),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ArtworkCard extends StatelessWidget {
-  final Artwork artwork;
-
-  const _ArtworkCard({required this.artwork});
-
-  @override
-  Widget build(BuildContext context) {
-    final imageUrl = artwork.imageId != null
-        ? IiifUrlBuilder.buildThumbnailUrl(artwork.imageId!)
-        : null;
-
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ArtworkDetailScreen(artwork: artwork),
-            ),
-          );
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: imageUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: imageUrl,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      errorWidget: (context, url, error) => const Icon(Icons.image_not_supported),
-                    )
-                  : const Icon(Icons.image_not_supported, size: 48),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    artwork.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                  if (artwork.artistTitle != null)
-                    Text(
-                      artwork.artistTitle!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Colors.grey,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

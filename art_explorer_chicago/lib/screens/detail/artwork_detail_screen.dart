@@ -35,11 +35,25 @@ class ArtworkDetailScreen extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
                     fit: BoxFit.contain,
+                    httpHeaders: const {
+                      'User-Agent': 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36',
+                      'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+                    },
                     placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(),
                     ),
                     errorWidget: (context, url, error) => const Center(
-                      child: Icon(Icons.image_not_supported, size: 48),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.image, size: 64, color: Colors.grey),
+                          SizedBox(height: 8),
+                          Text('High-resolution image unavailable',
+                              style: TextStyle(color: Colors.grey)),
+                          Text('Cloudflare protection blocks API access',
+                              style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
