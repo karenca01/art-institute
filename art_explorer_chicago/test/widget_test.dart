@@ -10,9 +10,9 @@ void main() {
   ) async {
     await tester.pumpWidget(const MyApp());
 
-    // The Artworks placeholder screen should be visible on launch.
+    // The Artworks screen (real UI) should be visible on launch.
     expect(find.text('Artworks'), findsWidgets);
-    expect(find.text('Artworks will appear here.'), findsOneWidget);
+    expect(find.text('Search artworks...'), findsOneWidget);
 
     // All four navigation destinations should be present.
     expect(find.text('Exhibitions'), findsWidgets);
@@ -28,6 +28,8 @@ void main() {
     await tester.tap(find.text('Exhibitions').last);
     await tester.pumpAndSettle();
 
-    expect(find.text('Exhibitions will appear here.'), findsOneWidget);
+    // The Exhibitions screen should be shown and the placeholder gone.
+    expect(find.text('Exhibitions'), findsWidgets);
+    expect(find.text('Exhibitions will appear here.'), findsNothing);
   });
 }
