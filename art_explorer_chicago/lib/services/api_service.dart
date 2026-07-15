@@ -62,9 +62,14 @@ class ApiService {
     return data.map((json) => Artwork.fromJson(json)).toList();
   }
 
+  /// Fetches museum hours from the `/hours` endpoint. Building address, phone,
+  /// and website are provided as static fallbacks by [MuseumInfo] because the
+  /// API no longer exposes a dedicated `museum-info` resource.
   Future<MuseumInfo> fetchMuseumInfo() async {
-    final response = await _get('/museum-info');
-    return MuseumInfo.fromJson(response);
+    final response = await _get('/hours');
+    final List<dynamic> data = response['data'] as List<dynamic>;
+    if (data.isEmpty) return MuseumInfo.fromJson(const {});
+    return MuseumInfo.fromJson(data.first as Map<String, dynamic>);
   }
 
   Future<Map<String, dynamic>> _get(String endpoint) async {

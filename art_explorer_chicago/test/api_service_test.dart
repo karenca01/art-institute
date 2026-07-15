@@ -140,11 +140,17 @@ void main() {
     });
 
     test('fetchMuseumInfo returns museum information', () async {
+      // The API now serves hours from the `/hours` endpoint, whose `data`
+      // is a list of hour records with per-day ISO-8601 duration fields.
       final mockResponse = {
-        'data': {
-          'name': 'Art Institute of Chicago',
-          'address': '111 S Michigan Ave',
-        },
+        'data': [
+          {
+            'monday_is_closed': false,
+            'monday_public_open': 'PT11H00M',
+            'monday_public_close': 'PT17H00M',
+            'tuesday_is_closed': true,
+          },
+        ],
       };
 
       final mockClient = http_mock.MockClient((request) async {
@@ -155,6 +161,9 @@ void main() {
       final museumInfo = await apiService.fetchMuseumInfo();
 
       expect(museumInfo.name, equals('Art Institute of Chicago'));
+      expect(museumInfo.hours, isNotNull);
+      expect(museumInfo.hours!['Monday'], equals('11 AM – 5 PM'));
+      expect(museumInfo.hours!['Tuesday'], equals('Closed'));
 
       apiService.dispose();
     });
