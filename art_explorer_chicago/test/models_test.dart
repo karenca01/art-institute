@@ -233,7 +233,9 @@ void main() {
       expect(museumInfo.name, equals('Museum'));
       expect(museumInfo.address, equals('123 Main St'));
       expect(museumInfo.hours, isNull);
-      expect(museumInfo.phone, isNull);
+      // Address/phone/website fall back to the museum's known public details
+      // when the API does not supply them.
+      expect(museumInfo.phone, equals(MuseumInfo.defaultPhone));
     });
 
     test('fromJson uses default name if missing', () {
